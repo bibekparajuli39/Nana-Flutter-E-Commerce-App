@@ -19,3 +19,14 @@ class AuthAuthenticated extends AuthState {
 }
 
 class AuthLogout extends AuthState {}
+
+// for forget
+class ForgotPasswordLoading extends AuthState {}
+
+class ForgotPasswordSuccess extends AuthState {}
+
+class ForgotPasswordError extends AuthState {
+  final String message;
+
+  ForgotPasswordError(this.message);
+}

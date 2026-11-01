@@ -110,5 +110,28 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(AuthError('Something went wrong'));
       }
     });
+    on<ForgotPassword>((event, emit) async {
+      emit(ForgotPasswordLoading());
+
+      try {
+        await repository.forget(event.email);
+
+        emit(ForgotPasswordSuccess());
+      } on FirebaseAuthException catch (e) {
+        String message = 'Password reset failed';
+
+        if (e.code == 'invalid-email') {
+          message = 'Please enter a valid email';
+        } else if (e.code == 'user-not-found') {
+          message = 'No account found with this email';
+        } else if (e.code == 'network-request-failed') {
+          message = 'Please check your internet connection';
+        }
+
+        emit(ForgotPasswordError(message));
+      } catch (e) {
+        emit(ForgotPasswordError('Something went wrong. Please try again.'));
+      }
+    });
   }
 }

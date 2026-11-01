@@ -20,3 +20,9 @@ class Signup extends AuthEvent {
 
   Signup({required this.name, required this.email, required this.password});
 }
+
+class ForgotPassword extends AuthEvent {
+  final String email;
+
+  ForgotPassword({required this.email});
+}

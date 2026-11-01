@@ -120,4 +120,9 @@ class AuthRepositories {
       await FacebookAuth.instance.logOut();
     } catch (_) {}
   }
+
+  // forget password
+  Future<void> forget(String email) async {
+    await auth.sendPasswordResetEmail(email: email.trim());
+  }
 }
