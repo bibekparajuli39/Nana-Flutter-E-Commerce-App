@@ -10,4 +10,5 @@ class Routes {
   static final address = '/address';
   static final setting = '/setting';
   static final aboutus = '/aboutus';
+  static final forget = '/forget';
 }
